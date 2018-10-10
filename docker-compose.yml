@@ -1,0 +1,23 @@
+version: "3"
+
+networks:
+  network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.5.0/24
+
+services:
+  rabbitmq:
+    container_name: rabbitmq
+    hostname: rabbitmq-local
+    volumes:
+      - .:/home/
+    ports:
+      - 192.168.5.1:4369:4369
+      - 192.168.5.1:5671:5671
+      - 192.168.5.1:15672:15672
+    networks:
+      - network
+    build:
+      context: .
