@@ -1,4 +1,4 @@
-FROM rabbitmq:3.7
+FROM rabbitmq:3.6.15
 
 WORKDIR '/home'
 
@@ -14,6 +14,7 @@ CMD cp /home/plugins/* /usr/lib/rabbitmq/lib/rabbitmq_server-$RABBITMQ_VERSION/p
     && rabbitmqctl set_user_tags admin administrator \
     && rabbitmqctl set_permissions -p / admin ".*" ".*" ".*" \
     && rabbitmqadmin -H localhost -u admin -p admin -q import config/rabbitmq.json \
+    && rabbitmqctl set_permissions -p staging admin ".*" ".*" ".*" \
     && rabbitmqctl stop \
     && sleep 1 \
     && rabbitmq-server
