@@ -1,7 +1,7 @@
 # Docker - Rabbit MQ with Delayed Message Exchange
 ## Run Docker
-* `vboxmanage hostonlyif create`
-* `vboxmanage hostonlyif ipconfig NAME_CREATED_ABOVE --ip 192.168.5.1`
+* `export VBOXNET_RMQ_DELAYED_MESSAGE=$(vboxmanage hostonlyif create | awk -F"'" '{print $2}')` (only run once)
+* `vboxmanage hostonlyif ipconfig $VBOXNET_RMQ_DELAYED_MESSAGE --ip 192.168.5.1`
 * `docker-compose up -d`
 
 ## Login
